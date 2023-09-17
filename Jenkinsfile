@@ -1,6 +1,27 @@
 pipeline{
     agent any
-    stages{
-        git branch: 'main', url: 'https://github.com/Sha2893/Project_shailesh95_java.git'
+    
+  stages{
+         
+     stage('Git Checkout'){
+        step{
+
+      gitCheckout(
+        git branch: 'main' 
+        url: 'https://github.com/Sha2893/Project_shailesh95_java.git'
+      )
     }
+    }
+
+     stage ('Unit test maven')
+
+     step{
+        
+        script{
+            mvnTest()
+        }
+     }
+
+}
+   
 }
