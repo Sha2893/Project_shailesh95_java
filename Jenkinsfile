@@ -6,10 +6,10 @@ pipeline{
   stages{
          
      stage('Git Checkout'){
-        step{
+        steps{
 
       gitCheckout(
-        git branch: 'main' 
+        branch: 'main' 
         url: 'https://github.com/Sha2893/Project_shailesh95_java.git'
       )
     }
@@ -17,7 +17,7 @@ pipeline{
 
      stage ('Unit test maven')
 
-     step{
+     steps{
         
         script{
             mvnTest()
