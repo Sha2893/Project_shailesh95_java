@@ -23,6 +23,7 @@ pipeline{
             mvnTest()
         }
      }
+     }
 
       stage('Integration testing'){
 
