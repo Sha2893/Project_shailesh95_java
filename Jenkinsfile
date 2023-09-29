@@ -53,10 +53,29 @@ stage('Static code analysis: Sonarqube'){
                script{
                    
                    def SonarQubecredentialsId = 'sonarqube-api'
-                   statiCodeAnalysis(SonarQubecredentialsId)
+                   StaticCodeAnalysis(SonarQubecredentialsId)
                }
             }
         }
    
-}
+stage('Quality Gate Status Check : Sonarqube'){
+         when { expression {  params.action == 'create' } }
+            steps{
+               script{
+                   
+                   def SonarQubecredentialsId = 'sonarqube-api'
+                   QualityGate(SonarQubecredentialsId)
+               }
+            }
+        }
+        stage('Maven Build : maven'){
+         when { expression {  params.action == 'create' } }
+            steps{
+               script{
+                   
+                   mavenBuild()
+               }
+            }
+        }
+  }
 }
